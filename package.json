@@ -1,0 +1,31 @@
+{
+  "name": "color-term-console",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "Polyfills to use 'console' methods on server in the color terminal. Log, info, warn, error and others, colors, formatting and grouping support.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/priezz/color-term-console"
+  },
+  "scripts": {
+    "build": "npm install && npm update && babel --stage 0 --optional runtime src --out-dir .",
+    "minify": "uglifyjs --compress --screw-ie8 --mangle --output index.min.js index.js",
+    "browserify": "browserify index.js > /tmp/i.js; sed -i 's/require/muffin/g' /tmp/i.js; uglifyjs --compress --screw-ie8 --mangle --output index.min.js /tmp/i.js;",
+    "deploy": "npm run build; npm run minify; git add .; git commit; git push"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.9.2",
+    "cli-color": "^1.1.0",
+    "json-stringify-pretty-compact": "^1.0.1",
+    "uglifyjs": "^2.4.10"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-core": "^6.7.6",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "eslint": "^2.8.0"
+  }
+}
