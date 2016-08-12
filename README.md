@@ -2,7 +2,7 @@
 
 This is the simple Node module, which implements a few polyfills for the 'console' object methods to be used within the server or mobile code for pretty terminal output. Log, info, warn, error, debug, group and others - all with colors, formatting and grouping support. Fully React Native compatible!
 
-![Screenshot](screenshot1.png)
+![Screenshot](https://gitlab.com/priezz/color-term-console/raw/master/screenshot1.png)
 
 If you have a better screenshot, do not hesitate to make a PR or just email it to me.
 
