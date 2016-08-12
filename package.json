@@ -1,6 +1,6 @@
 {
   "name": "color-term-console",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "README": "README.md",
   "author": "Alexandr Priezzhev",
   "description": "Polyfills to use 'console' methods on server in the color terminal. Log, info, warn, error and others, colors, formatting and grouping support.",

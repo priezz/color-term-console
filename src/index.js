@@ -3,7 +3,7 @@
 import clc from "cli-color"
 import stringify from "json-stringify-pretty-compact"
 
-_global = global || window
+const _global = global || window
 const console = _global.console
 
 
