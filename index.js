@@ -21,10 +21,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var console = window.console;
+_global = global || window;
+var console = _global.console;
 
 /* We consider to be in terminal if the original console.clear() method does not exist */
-var inTerm = typeof (window._console || console).clear === "undefined";
+var inTerm = typeof (_global._console || console).clear === "undefined";
 
 var noop = function noop() {};
 var hr = "-".repeat(80); // 80 char column
@@ -38,7 +39,7 @@ var condensedJsonOutput = exports.condensedJsonOutput = function condensedJsonOu
 };
 
 // helper functions:
-var perf = window.performance;
+var perf = _global.performance;
 var now = perf && (perf.now || perf.mozNow || perf.msNow || perf.oNow || perf.webkitNow);
 var getTime = function getTime() {
 	return now && now.call(perf) || new Date().getTime();
@@ -171,7 +172,7 @@ var printToTerm = function printToTerm(method) {
 		message = indent + message.replace(/\n/g, "\n" + indent);
 	}
 
-	window._console[method]("\x1b[39m" + message.replace(/\n/g, "\x1b[37m\n\x1b[39m") + "\x1b[37m");
+	_global._console[method]("\x1b[39m" + message.replace(/\n/g, "\x1b[37m\n\x1b[39m") + "\x1b[37m");
 };
 
 var methodLabel = function methodLabel(method) {
@@ -179,10 +180,10 @@ var methodLabel = function methodLabel(method) {
 };
 
 /* Reassign methods only once */
-if (typeof window._console === "undefined") {
+if (typeof _global._console === "undefined") {
 	(function () {
 		var _console = {};
-		window._console = _console;
+		_global._console = _console;
 
 		/* These all do nothing if they aren't defined */
 		var noopMethods = ["profile", "profileEnd", "trace", "table"];

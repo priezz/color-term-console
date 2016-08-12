@@ -3,11 +3,12 @@
 import clc from "cli-color"
 import stringify from "json-stringify-pretty-compact"
 
-const console = window.console
+_global = global || window
+const console = _global.console
 
 
 /* We consider to be in terminal if the original console.clear() method does not exist */
-const inTerm = typeof (window._console || console).clear === "undefined"
+const inTerm = typeof (_global._console || console).clear === "undefined"
 
 const noop = () => {}
 const hr = "-".repeat( 80 ) // 80 char column
@@ -22,7 +23,7 @@ export const condensedJsonOutput = ( value ) => {
 
 
 // helper functions:
-const perf = window.performance
+const perf = _global.performance
 const now = perf && ( perf.now || perf.mozNow || perf.msNow || perf.oNow || perf.webkitNow )
 const getTime = ()  => now && now.call( perf ) || ( new Date().getTime() )
 
@@ -153,7 +154,7 @@ const printToTerm = ( method, ...args ) => {
 		message = indent + message.replace( /\n/g, "\n" + indent )
 	}
 
-	window._console[ method ](
+	_global._console[ method ](
 		"\x1b[39m" + message.replace( /\n/g, "\x1b[37m\n\x1b[39m" ) + "\x1b[37m"
 	)
 }
@@ -165,9 +166,9 @@ const methodLabel = ( method ) => method === "log" ? [] : [
 ]
 
 /* Reassign methods only once */
-if( typeof window._console === "undefined" ) {
+if( typeof _global._console === "undefined" ) {
 	const _console = {}
-	window._console = _console
+	_global._console = _console
 
 	/* These all do nothing if they aren't defined */
 	let noopMethods = [ "profile", "profileEnd", "trace", "table" ]
